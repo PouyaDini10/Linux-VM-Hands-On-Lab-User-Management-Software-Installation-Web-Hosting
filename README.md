@@ -1,5 +1,8 @@
 # Linux-VM-Hands-On-Lab-User-Management-Software-Installation-Web-Hosting
 
+<img width="290" alt="image" src="https://github.com/user-attachments/assets/e6306959-eafa-40cf-a84e-b60211c1e6f8" />
+
+
 ## Objective
 
 Goal : Setup a Linux VM(Ubuntu) and I will perform basic tasks like adding users and installing software. 
