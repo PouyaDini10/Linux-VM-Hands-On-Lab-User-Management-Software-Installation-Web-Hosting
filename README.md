@@ -82,6 +82,112 @@ Output:
 
 ## Install Apache(Web Server)
 
+Apache is a program that will allow us to host and show websites. 
+
+Run these Command prompts:
+
+- **sudo apt update** (again just checking for any updates) 
+
+- **sudo apt install apache2 -y** (runs as an admin & will attempt to install Apache & will say yes to every prompt)
+
+<img width="466" alt="image" src="https://github.com/user-attachments/assets/d78a2269-33af-454f-8297-0cf7084f1342" />
+
+My system already has Apache 2, but yours may read differently. 
+
+## Start & Enable Apache
+
+Start Apache 2:
+
+- **sudo systemctl start apache2** ← This command prompt, “systemctl” manages services like Apache.
+
+- **sudo systemctl enable apache2** ← This will simply enable Apache services, even on reboots.
+
+Run a status update to ensure everything is working properly:
+
+- **sudo systemctl status apache2**
+
+ <img width="466" alt="image" src="https://github.com/user-attachments/assets/3601e723-f53e-441c-9a46-4ff86b05f0d5" />
+
+I see that I'm active, now I'm going to attempt to access the web page. 
+
+We're using the public IP address because we are outside of Azure’s internal network. To access the web page we created through our Linux VM, we will need to access it from the internet. A public IP address would alleviate this.
+
+## Troubleshooting Apache Web Server Access on Azure VM
+
+Initially, when I tried to run “http://[your-public-ip]” on my google search bar, the site did not load. I can only assume 2 scenarios:
+- Either the web server is not running(which we already confirmed)
+- Azure blocks web traffic by default
+
+### Next Step: Allow HTTP(Port 80) in the Azure Network Security Group(NSG)
+
+**HTTP(HyperText Transfer Protocol) Protocol** - It’s the foundation of data communication on the World Wide Web. When you visit a website, your browser and the website’s server talk to each other using HTTP.
+
+**Port 80** - Whenever your browser makes an HTTP request, it's connecting to the server via Port 80. A Port in basic terms can be like a door for your computer or server. Your computers have many ports(0 - 65535) and can handle many different types of network traffic. However, Port 80 is used for non-sensitive websites and if you want to go the secured route, HTTPS(Port 443) is the better encrypted route. 
+
+HTTP(Port 80) uses TCP instead of UDP:
+
+**TCP(Transmission Control Protocol)** - Reliable, ordered, and connection based network protocol that runs a checklist before sending out the network packets.
+
+**UDP (User Database Protocol)** - This protocol is faster, it's unreliable and there’s no guarantee that all the data will be transmitted. 
+
+HTTP(Hyper Text Transfer Protocol) needs a connection focused and reliable data transmission technique. You wouldn't want a half loaded web page. 
+
+**Allow HTTP Port 80 in the Network Security Group(NSG)**
+
+Open Port 80 for HTTP access:
+- In azure, locate the network settings for our Linux VM
+- Under Inbound Port Rules, create a new port rule
+- Use the following settings:
+  - Source: Any
+  - Source port ranges: *
+  - Destination: Any
+  - Destination port ranges: 80
+  - Protocol: TCP
+  - Action: Allow
+  - Priority: (e.g., 1000 — lower means higher priority)
+  - Name: Allow-HTTP
+
+Now attempt to access the web page, “http://your-Linux-VM's-public-ip”, you should see this: 
+
+<img width="460" alt="image" src="https://github.com/user-attachments/assets/61914280-395d-47c5-b07b-35d9311913b4" />
+
+## Design the Web Page(Through our SSH connection)
+
+Go to the folder where the web files exist: 
+
+Type in the command prompt: **cd /var/www/html**
+
+**cd** - Mean Change directory, it's used to move around your folders structure in the terminal. 
+
+### Remove the default index.html 
+
+If you want to start off with a fresh HTML page, you would have to input this command: **sudo rm index.html**
+
+### Create your own HTML file
+
+You can use a terminal based text editor like nano: **sudo nano index.html**
+
+<img width="362" alt="image" src="https://github.com/user-attachments/assets/55a28757-1309-4c29-bb84-d6b2d4804fe2" />
+
+From here you can begin designing the web page however you'd like. 
+
+### Save and exit
+
+CTRL + O → (Enter) → CTRL + X
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
