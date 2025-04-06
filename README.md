@@ -169,7 +169,12 @@ You can use a terminal based text editor like nano: **sudo nano index.html**
 
 <img width="362" alt="image" src="https://github.com/user-attachments/assets/55a28757-1309-4c29-bb84-d6b2d4804fe2" />
 
-From here you can begin designing the web page however you'd like. 
+From here you can begin designing the web page however you'd like.
+
+### My results
+
+<img width="574" alt="image" src="https://github.com/user-attachments/assets/a1fcf75e-a972-4c89-9aef-774a33af6183" />
+
 
 ### Save and exit
 
